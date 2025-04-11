@@ -245,6 +245,7 @@
         let videoHasEnded = false; // 跟踪视频是否已经自然结束
         let userClickedPosition = null; // 记录用户点击的位置
         let shortcutHintTimeout = null; // 用于控制快捷键提示显示时间
+        let adFilteringEnabled = true; // 默认开启广告过滤
 
         // 页面加载
         document.addEventListener('DOMContentLoaded', function() {
@@ -261,6 +262,9 @@
             // 设置自动连播开关状态
             autoplayEnabled = localStorage.getItem('autoplayEnabled') !== 'false'; // 默认为true
             document.getElementById('autoplayToggle').checked = autoplayEnabled;
+            
+            // 获取广告过滤设置
+            adFilteringEnabled = localStorage.getItem(PLAYER_CONFIG.adFilteringStorage) !== 'false'; // 默认为true
             
             // 监听自动连播开关变化
             document.getElementById('autoplayToggle').addEventListener('change', function(e) {
@@ -369,7 +373,7 @@
             // 配置HLS.js选项
             const hlsConfig = {
                 debug: false,
-                loader: CustomHlsJsLoader,
+                loader: adFilteringEnabled ? CustomHlsJsLoader : Hls.DefaultConfig.loader,
                 enableWorker: true,
                 lowLatencyMode: false,
                 backBufferLength: 90,

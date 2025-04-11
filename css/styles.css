@@ -222,6 +222,20 @@ body {
     box-shadow: 0 0 0 2px rgba(0, 204, 255, 0.3);
 }
 
+/* 添加广告过滤开关的CSS */
+#adFilterToggle:checked + .toggle-bg {
+    background-color: var(--primary-color);
+}
+
+#adFilterToggle:checked ~ .toggle-dot {
+    transform: translateX(1.5rem);
+}
+
+#adFilterToggle:focus + .toggle-bg,
+#adFilterToggle:hover + .toggle-bg {
+    box-shadow: 0 0 0 2px rgba(0, 204, 255, 0.3);
+}
+
 .toggle-dot {
     transition: transform 0.3s ease-in-out;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -232,5 +246,9 @@ body {
 }
 
 #yellowFilterToggle:checked ~ .toggle-dot {
+    box-shadow: 0 2px 4px rgba(0, 204, 255, 0.3);
+}
+
+#adFilterToggle:checked ~ .toggle-dot {
     box-shadow: 0 2px 4px rgba(0, 204, 255, 0.3);
 }
